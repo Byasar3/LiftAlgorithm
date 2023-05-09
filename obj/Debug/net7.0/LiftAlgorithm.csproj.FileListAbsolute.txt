@@ -1,0 +1,15 @@
+/Users/Berna/Documents/LiftAlgorithm/bin/Debug/net7.0/LiftAlgorithm
+/Users/Berna/Documents/LiftAlgorithm/bin/Debug/net7.0/LiftAlgorithm.deps.json
+/Users/Berna/Documents/LiftAlgorithm/bin/Debug/net7.0/LiftAlgorithm.runtimeconfig.json
+/Users/Berna/Documents/LiftAlgorithm/bin/Debug/net7.0/LiftAlgorithm.dll
+/Users/Berna/Documents/LiftAlgorithm/bin/Debug/net7.0/LiftAlgorithm.pdb
+/Users/Berna/Documents/LiftAlgorithm/obj/Debug/net7.0/LiftAlgorithm.csproj.AssemblyReference.cache
+/Users/Berna/Documents/LiftAlgorithm/obj/Debug/net7.0/LiftAlgorithm.GeneratedMSBuildEditorConfig.editorconfig
+/Users/Berna/Documents/LiftAlgorithm/obj/Debug/net7.0/LiftAlgorithm.AssemblyInfoInputs.cache
+/Users/Berna/Documents/LiftAlgorithm/obj/Debug/net7.0/LiftAlgorithm.AssemblyInfo.cs
+/Users/Berna/Documents/LiftAlgorithm/obj/Debug/net7.0/LiftAlgorithm.csproj.CoreCompileInputs.cache
+/Users/Berna/Documents/LiftAlgorithm/obj/Debug/net7.0/LiftAlgorithm.dll
+/Users/Berna/Documents/LiftAlgorithm/obj/Debug/net7.0/refint/LiftAlgorithm.dll
+/Users/Berna/Documents/LiftAlgorithm/obj/Debug/net7.0/LiftAlgorithm.pdb
+/Users/Berna/Documents/LiftAlgorithm/obj/Debug/net7.0/LiftAlgorithm.genruntimeconfig.cache
+/Users/Berna/Documents/LiftAlgorithm/obj/Debug/net7.0/ref/LiftAlgorithm.dll
