@@ -1,4 +1,4 @@
-﻿
+﻿/*
 using Microsoft.VisualBasic.FileIO;
 
 string filePath = "/Users/Berna/Documents/LiftAlgorithm/DataInput.csv";
@@ -20,8 +20,16 @@ using (TextFieldParser parser = new TextFieldParser(filePath))
         Console.WriteLine(fields[1]);
         Console.WriteLine(fields[2]);
         Console.WriteLine(fields[3]);
+
+    }
+
+}
+*/
+
+internal class Program
+{
+    private static void Main(string[] args)
+    {
+        List<Person> persons = CsvParser.ParsePerson("/Users/Berna/Documents/LiftAlgorithm/DataInput.csv");
     }
 }
-
-
-
