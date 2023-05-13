@@ -14,7 +14,7 @@ public class CsvParser
             {
                 Id = int.Parse(values[0]),
                 FromFloor = int.Parse(values[1]),
-                ToFloor = int.Parse(values[2]),
+                DestinationFloor = int.Parse(values[2]),
                 CallTime = int.Parse(values[3])
             };
 
