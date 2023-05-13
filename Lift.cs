@@ -1,7 +1,6 @@
 public class Lift
 {
-    private Person person;
-
+   
     public int CurrentFloor { get; set; }
     public int LastProcessedTime { get; set;}
     public int Capacity { get; }
@@ -81,7 +80,7 @@ public void ProcessNextDestination() {
     //if they are at their floor, they are added to a new list 'people to remove'
     // then everyone in that list is removed from the PeopleInLift list
     List<Person> peopleToRemove = new List<Person>();
-
+    
     foreach (var person in PeopleInLift)
     {
         if (person.DestinationFloor == CurrentFloor)
@@ -95,9 +94,10 @@ public void ProcessNextDestination() {
         RemovePersonFromLift(person);
     }
 
-    if (PeopleInLift.Count == 0)
+    // if there are no people in the lift and there are still calls, the call is removed
+    if (PeopleInLift.Count == 0 && CallQueue.Count > 0)
     {
-        CallQueue.Remove(person);
+        CallQueue.RemoveAt(0);
     }
 
 }
