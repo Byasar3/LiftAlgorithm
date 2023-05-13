@@ -100,6 +100,10 @@ public void ProcessNextDestination() {
         CallQueue.RemoveAt(0);
     }
 
+    // if there are multiple calls in call queue:
+    // method will repeatedly run over and over again until there are either no more people in lift 
+    // and there are no more calls
+
 }
 
 }
