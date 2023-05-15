@@ -2,7 +2,7 @@
 {
     private static void Main(string[] args)
     {        
-        //making a list of people to store the csv data
+        //making a list person objects, called people, to store the csv data
         List<Person> people = new List<Person>();
 
         //file path:
@@ -29,10 +29,19 @@
 
                 people.Add(person);
             }
+
         }
-        foreach (var person in people){
-            Console.WriteLine($"{person.Id}, {person.FromFloor}, {person.DestinationFloor}, {person.CallTime}");
-        }
+
+        // testing various code bits: 
+
+        // foreach (var person in people)
+        // {
+        //     Console.WriteLine($"{person.Id}, {person.FromFloor}, {person.DestinationFloor}, {person.CallTime}");
+        // }
+        
+        // Lift lift = new Lift();
+        // string liftStatus = lift.GetLiftStatus();
+        // Console.WriteLine(liftStatus);    
         
     }
 }

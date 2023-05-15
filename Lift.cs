@@ -17,7 +17,6 @@ public class Lift
     }
 
 
-
 //methods:
 
 //adding call to call queue:
@@ -106,4 +105,14 @@ public void ProcessNextDestination() {
 
 }
 
-}
+    public string GetLiftStatus()
+    {
+    string peopleInLiftStr = string.Join(", ", PeopleInLift.Select(person => person.ToString()));
+    string callQueueStr = string.Join(", ", CallQueue.Select(person => person.ToString()));
+    return ($"{LastProcessedTime}, {CurrentFloor}, {peopleInLiftStr}, {callQueueStr} ");
+    }
+    
+  
+ }
+
+ 
