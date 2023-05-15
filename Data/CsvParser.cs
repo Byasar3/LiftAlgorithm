@@ -3,6 +3,7 @@ public class CsvParser
 {
     public static List<Person> ParsePerson (string filePath)
     {
+        // filePath = CsvParser.ParsePerson("/Users/Berna/Documents/LiftAlgorithm/DataInput.csv");
         List<Person> persons = new List<Person>();
 
         string[] lines = File.ReadAllLines(filePath);
