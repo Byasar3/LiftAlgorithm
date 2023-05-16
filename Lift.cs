@@ -93,13 +93,14 @@ public void ProcessNextDestination() {
         RemovePersonFromLift(person);
     }
     
+    // checking if there is space in the lift and if there are calls to be processed
     if (PeopleInLift.Count < Capacity && CallQueue.Count > 0)
     {
-        var person = CallQueue[0];
+        var boardingPerson = CallQueue[0];
         CallQueue.RemoveAt(0);
-        AddPersonToLift(person);
+        AddPersonToLift(boardingPerson);
     }
-    
+
     // if there are no people in the lift and there are still calls, the call is removed
     if (PeopleInLift.Count == 0 && CallQueue.Count > 0)
     {
