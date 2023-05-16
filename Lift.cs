@@ -6,6 +6,7 @@ public class Lift
     public int Capacity { get; }
     public List<Person> PeopleInLift { get; set; }
     public List<Person> CallQueue { get; set; }
+    public int CurrentTime { get; set; }
 
     public Lift()
     {
@@ -14,6 +15,7 @@ public class Lift
         Capacity = 8;
         CallQueue = new List<Person>();
         PeopleInLift = new List<Person>();
+        CurrentTime = 0;
     }
 
 
@@ -80,6 +82,21 @@ public void ProcessNextDestination() {
     //updating the current floor to the destination floor
     CurrentFloor = destination;
 
+    
+
+    // Update the LastProcessedTime when a call is processed
+    int previousProcessedTime = LastProcessedTime; // New variable to store the previous processed time
+    foreach (var person in PeopleInLift)
+    {
+        if (person.CallTime <= previousProcessedTime) // Check if the person's call time is before the previous processed time
+        {
+            LastProcessedTime = person.CallTime; // Update the LastProcessedTime accordingly
+            break; // Exit the loop after updating the LastProcessedTime
+        }
+    }
+        
+        CurrentTime++;
+
     //iterating through PeopleInLift list
     //if they are at their floor, they are added to a new list 'people to remove'
     // then everyone in that list is removed from the PeopleInLift list
@@ -122,7 +139,7 @@ public void ProcessNextDestination() {
     {
     string peopleInLiftStr = string.Join(", ", PeopleInLift.Select(person => person.ToString()));
     string callQueueStr = string.Join(", ", CallQueue.Select(person => person.ToString()));
-    return ($"{LastProcessedTime}, {CurrentFloor}, {peopleInLiftStr}, {callQueueStr} ");
+    return ($"{CurrentTime}, {CurrentFloor}, {peopleInLiftStr}, {callQueueStr} ");
     }
     
   

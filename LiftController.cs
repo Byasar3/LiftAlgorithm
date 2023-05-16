@@ -29,7 +29,15 @@ public class LiftController
         while (peopleToProcess.Count > 0)
         {
             // Check if there are people waiting and their call time has arrived
-            var callsToProcess = peopleToProcess.Where(p => p.CallTime <= lift.LastProcessedTime).ToList();
+            List<Person> callsToProcess = new List<Person>();
+            
+            foreach (var person in peopleToProcess)
+            {
+                if (person.CallTime <= lift.LastProcessedTime)
+                {
+                    callsToProcess.Add(person);
+                }
+            }
 
             foreach (var call in callsToProcess)
             {
