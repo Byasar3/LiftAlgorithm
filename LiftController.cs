@@ -16,22 +16,29 @@ public class LiftController
 
     public void ProcessCalls()
     {
-        // Populate peopleWaiting list
-        foreach (var person in PeopleWaiting)
-        {
-            PeopleWaiting.Add(person);
-        }
+        // // Populate peopleWaiting list
+        // foreach (var person in PeopleWaiting)
+        // {
+        //     PeopleWaiting.Add(person);
+        // }
+
+        //making a copy of the PeopleWaiting list to be able to modify it 
+        var peopleToProcess = new List<Person>(PeopleWaiting);
+
         //calling can move method: if there are calls or people in lift
-        while (lift.CanMove() || PeopleWaiting.Count > 0)
+        while (lift.CanMove() || peopleToProcess.Count > 0)
         {
             // Check if there are people waiting and their call time has arrived
-            var callsToProcess = PeopleWaiting.Where(p => p.CallTime <= lift.LastProcessedTime).ToList();
+            var callsToProcess = peopleToProcess.Where(p => p.CallTime <= lift.LastProcessedTime).ToList();
 
             foreach (var call in callsToProcess)
             {
                 lift.AddCallToQueue(call);
-                PeopleWaiting.Remove(call);
-            }
+                // then remove the processed calls from peopleToProcess List
+                peopleToProcess.Remove(call);
+                
+            } 
+
 
             // variable int to store the time 
             int time = lift.LastProcessedTime;

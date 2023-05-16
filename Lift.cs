@@ -55,10 +55,15 @@ public int GetNextDestination()
     if (PeopleInLift.Count > 0)
     {
         return PeopleInLift[0].DestinationFloor;
-    } else 
+    } 
+    else if (CallQueue.Count > 0)
     {
         return CallQueue[0].DestinationFloor;
     }
+    else
+    {
+        return 1; // if there is noone in the lift and no calls in the queue then return lift to floor 1 
+    }   
 }
 
 //mimicking the process of the lift moving from one floor to another
