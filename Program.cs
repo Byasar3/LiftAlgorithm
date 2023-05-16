@@ -43,5 +43,9 @@
         // string liftStatus = lift.GetLiftStatus();
         // Console.WriteLine(liftStatus);    
         
+
+        //running the LiftController:
+        LiftController liftController = new LiftController(people);
+        liftController.ProcessCalls();
     }
 }

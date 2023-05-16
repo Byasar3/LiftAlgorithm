@@ -1,35 +1,71 @@
-using System;
+
 public class LiftController 
 {
     private Lift lift;
-    private List<Person> peopleWaiting;
+    public List<Person> PeopleWaiting { get; }
+    private List<string> output;
 
-    public LiftController()
+    public LiftController(List<Person> people)
     {
         lift = new Lift();
-        peopleWaiting = new List<Person>();
+        PeopleWaiting = new List<Person>(people);
+        output = new List<string>();
     }
 
     //methods:
 
     public void ProcessCalls()
     {
-        //making a new list of strings to store the output information
-        List<string> output = new List<string>();
-
-        //calling can move method: if there are calls or people in lift
-        while (lift.CanMove())
+        // Populate peopleWaiting list
+        foreach (var person in PeopleWaiting)
         {
+            PeopleWaiting.Add(person);
+        }
+        //calling can move method: if there are calls or people in lift
+        while (lift.CanMove() || PeopleWaiting.Count > 0)
+        {
+            // Check if there are people waiting and their call time has arrived
+            var callsToProcess = PeopleWaiting.Where(p => p.CallTime <= lift.LastProcessedTime).ToList();
+
+            foreach (var call in callsToProcess)
+            {
+                lift.AddCallToQueue(call);
+                PeopleWaiting.Remove(call);
+            }
+
             // variable int to store the time 
             int time = lift.LastProcessedTime;
             lift.ProcessNextDestination();
+            Console.WriteLine($"Processing time: {time}");
+            Console.WriteLine($"Current floor: {lift.CurrentFloor}");            
 
-            // creating a string to store information
-            string liftStatus = $"{time}, {lift.CurrentFloor}, {lift.PeopleInLift}, {lift.CallQueue}";
+            // call GetLiftStatus method and add that to output
+            string liftStatus = lift.GetLiftStatus();
+            Console.WriteLine($"Lift status: {liftStatus}");
+
             output.Add(liftStatus);
-            Console.Write(output);
+            Console.WriteLine($"Output Count: {output.Count}");
         }
-        
-    
+
+        Console.WriteLine($"Output Count: {output.Count}");
+        WriteOutputToCSV();
+    }
+
+    private void WriteOutputToCSV()
+    {
+        string csvPath = "DataOutput.csv";
+
+        using (var outputData = new StreamWriter(csvPath))
+        {
+            //writing header:
+            outputData.WriteLine("Time, Current Floor, People In Lift, Call Queue");
+
+            //writing the output lines:
+            foreach (var line in output)
+            {
+                outputData.WriteLine(line);
+            }
+        }
+        Console.WriteLine($"Output has been written to {csvPath}.");
     }
 }

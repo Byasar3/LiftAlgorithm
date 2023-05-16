@@ -92,7 +92,14 @@ public void ProcessNextDestination() {
     {
         RemovePersonFromLift(person);
     }
-
+    
+    if (PeopleInLift.Count < Capacity && CallQueue.Count > 0)
+    {
+        var person = CallQueue[0];
+        CallQueue.RemoveAt(0);
+        AddPersonToLift(person);
+    }
+    
     // if there are no people in the lift and there are still calls, the call is removed
     if (PeopleInLift.Count == 0 && CallQueue.Count > 0)
     {
