@@ -26,7 +26,7 @@ public class LiftController
         var peopleToProcess = new List<Person>(PeopleWaiting);
 
         //calling can move method: if there are calls or people in lift
-        while (lift.CanMove() || peopleToProcess.Count > 0)
+        while (peopleToProcess.Count > 0)
         {
             // Check if there are people waiting and their call time has arrived
             var callsToProcess = peopleToProcess.Where(p => p.CallTime <= lift.LastProcessedTime).ToList();
@@ -39,19 +39,23 @@ public class LiftController
                 
             } 
 
+            // checking if the lift can move
+            if (lift.CanMove())
+            {
+                // variable int to store the time 
+                int time = lift.LastProcessedTime;
+                lift.ProcessNextDestination();
+                Console.WriteLine($"Processing time: {time}");
+                Console.WriteLine($"Current floor: {lift.CurrentFloor}");            
 
-            // variable int to store the time 
-            int time = lift.LastProcessedTime;
-            lift.ProcessNextDestination();
-            Console.WriteLine($"Processing time: {time}");
-            Console.WriteLine($"Current floor: {lift.CurrentFloor}");            
+                // call GetLiftStatus method and add that to output
+                string liftStatus = lift.GetLiftStatus();
+                Console.WriteLine($"Lift status: {liftStatus}");
 
-            // call GetLiftStatus method and add that to output
-            string liftStatus = lift.GetLiftStatus();
-            Console.WriteLine($"Lift status: {liftStatus}");
+                output.Add(liftStatus);
+                Console.WriteLine($"Output Count: {output.Count}");                
+            }
 
-            output.Add(liftStatus);
-            Console.WriteLine($"Output Count: {output.Count}");
         }
 
         Console.WriteLine($"Output Count: {output.Count}");
