@@ -11,7 +11,7 @@ public class Lift
     public Lift()
     {
         CurrentFloor = 1;
-        LastProcessedTime = 0;
+        LastProcessedTime = 5;
         Capacity = 8;
         CallQueue = new List<Person>();
         PeopleInLift = new List<Person>();
@@ -137,7 +137,7 @@ public void ProcessNextDestination() {
 
     public string GetLiftStatus()
     {
-    string peopleInLiftStr = string.Join(", ", PeopleInLift.Select(person => person.ToString()));
+    string peopleInLiftStr = string.Join(", ", PeopleInLift.Select(person => person.Id.ToString()));
     string callQueueStr = string.Join(", ", CallQueue.Select(person => person.ToString()));
     return ($"{CurrentTime}, {CurrentFloor}, {peopleInLiftStr}, {callQueueStr} ");
     }

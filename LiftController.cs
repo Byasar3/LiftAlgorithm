@@ -16,11 +16,6 @@ public class LiftController
 
     public void ProcessCalls()
     {
-        // // Populate peopleWaiting list
-        // foreach (var person in PeopleWaiting)
-        // {
-        //     PeopleWaiting.Add(person);
-        // }
 
         //making a copy of the PeopleWaiting list to be able to modify it 
         var peopleToProcess = new List<Person>(PeopleWaiting);
@@ -28,41 +23,55 @@ public class LiftController
         //calling can move method: if there are calls or people in lift
         while (peopleToProcess.Count > 0)
         {
+
             // Check if there are people waiting and their call time has arrived
             List<Person> callsToProcess = new List<Person>();
+            List<Person> peopleToRemove = new List<Person>();
             
             foreach (var person in peopleToProcess)
             {
+
                 if (person.CallTime <= lift.LastProcessedTime)
                 {
                     callsToProcess.Add(person);
+
+                    foreach (var call in callsToProcess)
+                    {
+                        lift.AddCallToQueue(call);
+                        // checking if the lift can move
+                        if (lift.CanMove())
+                        {
+                            // variable int to store the time 
+                            int time = lift.LastProcessedTime;
+                            lift.ProcessNextDestination();
+                            //Console.WriteLine($"Processing time: {time}");
+                            //Console.WriteLine($"Current floor: {lift.CurrentFloor}");            
+
+                            // call GetLiftStatus method and add that to output
+                            string liftStatus = lift.GetLiftStatus();
+                            //Console.WriteLine($"Lift status: {liftStatus}");
+
+                            output.Add(liftStatus);
+                            //Console.WriteLine($"Output Count: {output.Count}");                
+                        }
+
+                    } 
+
+
+
+                    peopleToRemove.Add(person);
                 }
             }
 
-            foreach (var call in callsToProcess)
+
+
+            // Remove the processed calls from peopleToProcess List
+            foreach (var person in peopleToRemove)
             {
-                lift.AddCallToQueue(call);
-                // then remove the processed calls from peopleToProcess List
-                peopleToProcess.Remove(call);
-                
-            } 
-
-            // checking if the lift can move
-            if (lift.CanMove())
-            {
-                // variable int to store the time 
-                int time = lift.LastProcessedTime;
-                lift.ProcessNextDestination();
-                Console.WriteLine($"Processing time: {time}");
-                Console.WriteLine($"Current floor: {lift.CurrentFloor}");            
-
-                // call GetLiftStatus method and add that to output
-                string liftStatus = lift.GetLiftStatus();
-                Console.WriteLine($"Lift status: {liftStatus}");
-
-                output.Add(liftStatus);
-                Console.WriteLine($"Output Count: {output.Count}");                
+                peopleToProcess.Remove(person);
             }
+
+
 
         }
 
