@@ -6,16 +6,15 @@ public class Lift
     public int Capacity { get; }
     public List<Person> PeopleInLift { get; set; }
     public List<Person> CallQueue { get; set; }
-    public int CurrentTime { get; set; }
+
 
     public Lift()
     {
         CurrentFloor = 1;
-        LastProcessedTime = 5;
+        LastProcessedTime = 0;
         Capacity = 8;
         CallQueue = new List<Person>();
         PeopleInLift = new List<Person>();
-        CurrentTime = 0;
     }
 
 
@@ -95,7 +94,7 @@ public void ProcessNextDestination() {
         }
     }
         
-        CurrentTime++;
+
 
     //iterating through PeopleInLift list
     //if they are at their floor, they are added to a new list 'people to remove'
@@ -139,7 +138,7 @@ public void ProcessNextDestination() {
     {
     string peopleInLiftStr = string.Join(", ", PeopleInLift.Select(person => person.Id.ToString()));
     string callQueueStr = string.Join(", ", CallQueue.Select(person => person.ToString()));
-    return ($"{CurrentTime}, {CurrentFloor}, {peopleInLiftStr}, {callQueueStr} ");
+    return ($"{LastProcessedTime}, {CurrentFloor}, {peopleInLiftStr}, {callQueueStr} ");
     }
     
   
