@@ -17,13 +17,13 @@ public class LiftController
     public void ProcessCalls()
     {
         // need to have a list of peoplewaiting to be picked up by lift
-        
-        // need to figure out where lift is going enxt 
-        lift.GetNextDestination();
+        while (lift.PeopleWaiting.Count > 0 || lift.PeopleInLift.Count >0)
+        {
+            // need to figure out where lift is going enxt 
+            lift.GetNextDestination();
 
-
-        // once we know what floor we are going to, which direction?
-        lift.WhichDirection();
-        
+            // once we know what floor we are going to, which direction?
+            lift.WhichDirection();
+        }
     }
 }

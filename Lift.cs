@@ -73,12 +73,15 @@ public int GetNextDestination()
 
 public void WhichDirection()
 {
-
-
-    if (CurrentFloor < PeopleWaiting[0].FromFloor)
+    if (CurrentFloor < PeopleWaiting[0].FromFloor || CurrentFloor < PeopleInLift[0].DestinationFloor)
     {
         LiftMovingUp();
     } 
+    else if (CurrentFloor == 10 || CurrentFloor > PeopleWaiting[0].FromFloor || CurrentFloor > PeopleInLift[0].DestinationFloor)
+    {
+        LiftMovingDown();
+    }
+    
 }
 
 public void LiftMovingUp()
@@ -121,7 +124,37 @@ public void WhenOnNextFloorGoingUp()
 
 public void LiftMovingDown()
 {
-    // 
+    while (CurrentFloor == 10 || CurrentFloor > PeopleWaiting[0].FromFloor || CurrentFloor > PeopleInLift[0].DestinationFloor)
+    {
+        WhenOnNextFloorGoingDown();
+    }
+}
+
+public void WhenOnNextFloorGoingDown()
+{
+    CurrentFloor--;
+    CurrentTime = CurrentTime + 10;
+
+    // check if anyone is waiting on floor
+    var peopleWaitingOnFloor = PeopleWaiting.Where(person => person.FromFloor == CurrentFloor && person.CallTime <= CurrentTime).ToList();
+
+    foreach (var person in peopleWaitingOnFloor)
+    {
+        AddPersonToLift(person);
+        RemoveFromPeopleWaiting(PeopleWaiting[0]);
+    }
+
+    // check if anyone is leaving the lift
+    var peopleLeavingTheLift = PeopleInLift.Where(person => person.DestinationFloor == CurrentFloor).ToList();
+    foreach (var person in peopleLeavingTheLift)
+    {
+        RemovePersonFromLift(person);
+    }
+
+    string liftStatus = GetLiftStatus();
+    output.Add(liftStatus);
+    WriteOutputToCSV();
+
 }
 
 public string GetLiftStatus()
@@ -140,7 +173,7 @@ public string GetLiftStatus()
 
     Console.WriteLine($"{CurrentTime}, {CurrentFloor}, {peopleInLiftStr}, {destinationStr} ");
 
-    return ($"{CurrentTime}, {CurrentFloor}, {peopleInLiftStr}, {destinationStr} ");
+    return ($"{CurrentTime}| {CurrentFloor}| {peopleInLiftStr}| {destinationStr} ");
 }
 
 private void WriteOutputToCSV()
