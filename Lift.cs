@@ -178,7 +178,7 @@ private void WriteOutputToCSV()
     using (var outputData = new StreamWriter(csvPath))
     {
         // writing header:
-        outputData.WriteLine("Time, Current Floor, People In Lift, Call Queue");
+        outputData.WriteLine("Time| Current Floor| People In Lift| Call Queue");
 
         // writing the output lines:
         foreach (var line in output)
