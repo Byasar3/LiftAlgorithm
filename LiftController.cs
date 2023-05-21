@@ -2,14 +2,10 @@
 public class LiftController 
 {
     private Lift lift;
-    private Person person;
-   
     
-
     public LiftController(List<Person> people)
     {
         lift = new Lift(people);
-        person = new Person();
     }
 
     //methods:
@@ -24,6 +20,6 @@ public class LiftController
 
             // once we know what floor we are going to, which direction?
             lift.WhichDirection();
-        }
+        } 
     }
 }
